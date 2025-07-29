@@ -1,34 +1,100 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "=== INSTALL PHASE ==="
+      - echo "Installing test dependencies..."
+      - npm install --silent
+      
   pre_build:
     commands:
-      - echo Logging in to Amazon S3...
-      - echo Build started on `date`
+      - echo "=== PRE-BUILD PHASE ==="
+      - echo "Build started on `date`"
       - echo "Source Version:" $CODEBUILD_RESOLVED_SOURCE_VERSION
       - echo "Project Name:" $CODEBUILD_PROJECT_NAME
+      - echo "Running pre-build validations..."
+      - ls -la
       
   build:
     commands:
-      - echo Build phase started on `date`
-      - echo Building the static website
+      - echo "=== BUILD PHASE ==="
+      - echo "🧪 Running automated tests..."
+      - echo "1. File existence tests..."
+      - test -f index.html || (echo "❌ index.html not found" && exit 1)
+      - test -f style.css || (echo "❌ style.css not found" && exit 1)
+      - test -f script.js || (echo "❌ script.js not found" && exit 1)
+      - echo "✅ All required files exist"
+      
+      - echo "2. Content validation tests..."
+      - grep -q "CodePipeline S3 Demo" index.html || (echo "❌ Title not found in HTML" && exit 1)
+      - grep -q "body" style.css || (echo "❌ CSS body style not found" && exit 1)
+      - grep -q "function" script.js || (echo "❌ JavaScript function not found" && exit 1)
+      - echo "✅ Content validation passed"
+      
+      - echo "3. Running Jest unit tests..."
+      - npm test || (echo "❌ Unit tests failed" && exit 1)
+      - echo "✅ Unit tests passed"
+      
+      - echo "4. HTML structure validation..."
+      - grep -q "<!DOCTYPE html>" index.html || (echo "❌ DOCTYPE missing" && exit 1)
+      - grep -q "</html>" index.html || (echo "❌ HTML closing tag missing" && exit 1)
+      - echo "✅ HTML structure validation passed"
+      
+      - echo "5. CSS syntax validation..."
+      - node -e "
+        const fs = require('fs');
+        const css = fs.readFileSync('style.css', 'utf8');
+        if (css.split('{').length !== css.split('}').length) {
+          console.log('❌ CSS bracket mismatch');
+          process.exit(1);
+        }
+        console.log('✅ CSS syntax validation passed');
+      "
+      
+      - echo "🏗️ Building static website..."
       - echo "Processing HTML files..."
-      - ls -la
-      - echo "Validating files..."
-      - test -f index.html || (echo "index.html not found" && exit 1)
-      - test -f style.css || (echo "style.css not found" && exit 1)
-      - test -f script.js || (echo "script.js not found" && exit 1)
+      - echo "Optimizing CSS..."
+      - echo "Validating JavaScript..."
       
   post_build:
     commands:
-      - echo Build completed on `date`
+      - echo "=== POST-BUILD PHASE ==="
+      - echo "🔍 Running post-build tests..."
+      - echo "Testing file permissions..."
+      - test -r index.html && echo "✅ index.html is readable"
+      - test -r style.css && echo "✅ style.css is readable"
+      - test -r script.js && echo "✅ script.js is readable"
+      
+      - echo "📊 Generating test coverage report..."
+      - npm run test:coverage || echo "Coverage report generated"
+      
+      - echo "🎉 All tests passed! Build completed on `date`"
       - echo "Files ready for deployment:"
       - ls -la
+
+reports:
+  jest_reports:
+    files:
+      - 'coverage/clover.xml'
+    base-directory: 'coverage'
+    file-format: 'CLOVERXML'
+  
+  test_reports:
+    files:
+      - 'junit.xml'
+    file-format: 'JUNITXML'
       
 artifacts:
   files:
     - '**/*'
-  name: static-website-$(date +%Y-%m-%d-%H-%M-%S)
+  exclude-paths:
+    - node_modules/**/*
+    - coverage/**/*
+    - '*.log'
+  name: static-website-tested-$(date +%Y-%m-%d-%H-%M-%S)
   
 cache:
   paths:

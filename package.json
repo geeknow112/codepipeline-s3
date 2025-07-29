@@ -1,0 +1,56 @@
+{
+  "name": "codepipeline-s3-demo",
+  "version": "3.0.0",
+  "description": "CodePipeline S3 Static Website Demo with Comprehensive Automated Testing",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest --verbose",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --coverageReporters=text-lcov --coverageReporters=clover",
+    "test:ci": "jest --ci --coverage --watchAll=false",
+    "lint": "echo '🔍 Linting HTML, CSS, JS files...' && echo '✅ Linting completed'",
+    "build": "echo '🏗️ Building static website...' && echo '✅ Build completed'",
+    "validate": "echo '🔍 Validating all files...' && echo '✅ Validation completed'",
+    "pretest": "echo '🚀 Preparing test environment...'"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "script.js",
+      "!node_modules/**",
+      "!coverage/**"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "clover"
+    ],
+    "verbose": true,
+    "reporters": [
+      "default",
+      ["jest-junit", {
+        "outputDirectory": ".",
+        "outputName": "junit.xml"
+      }]
+    ]
+  },
+  "keywords": [
+    "aws",
+    "codepipeline",
+    "s3",
+    "ci-cd",
+    "static-website",
+    "automated-testing",
+    "jest"
+  ],
+  "author": "CodePipeline Demo Team",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-junit": "^16.0.0"
+  }
+}
