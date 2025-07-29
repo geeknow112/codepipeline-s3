@@ -44,7 +44,8 @@ phases:
       - echo "✅ HTML structure validation passed"
       
       - echo "5. CSS syntax validation..."
-      - node -e "
+      - |
+        node -e "
         const fs = require('fs');
         const css = fs.readFileSync('style.css', 'utf8');
         if (css.split('{').length !== css.split('}').length) {
@@ -52,7 +53,7 @@ phases:
           process.exit(1);
         }
         console.log('✅ CSS syntax validation passed');
-      "
+        "
       
       - echo "🏗️ Building static website..."
       - echo "Processing HTML files..."
