@@ -1,0 +1,35 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon S3...
+      - echo Build started on `date`
+      - echo "Source Version:" $CODEBUILD_RESOLVED_SOURCE_VERSION
+      - echo "Project Name:" $CODEBUILD_PROJECT_NAME
+      
+  build:
+    commands:
+      - echo Build phase started on `date`
+      - echo Building the static website
+      - echo "Processing HTML files..."
+      - ls -la
+      - echo "Validating files..."
+      - test -f index.html || (echo "index.html not found" && exit 1)
+      - test -f style.css || (echo "style.css not found" && exit 1)
+      - test -f script.js || (echo "script.js not found" && exit 1)
+      
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo "Files ready for deployment:"
+      - ls -la
+      
+artifacts:
+  files:
+    - '**/*'
+  name: static-website-$(date +%Y-%m-%d-%H-%M-%S)
+  
+cache:
+  paths:
+    - '/root/.npm/**/*'
