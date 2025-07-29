@@ -6,85 +6,44 @@ phases:
       nodejs: 12
       php: 7.4
     commands:
-      - echo "INSTALL PHASE"
-      - echo "Installing Node.js and PHP dependencies"
-      - node --version
-      - php --version
-      - echo "Installing Node.js dependencies"
+      - echo "Installing dependencies"
       - npm install
-      - echo "Installing Composer"
       - curl -sS https://getcomposer.org/installer | php
       - mv composer.phar /usr/local/bin/composer
-      - composer --version
-      - echo "Installing PHP dependencies"
       - composer install --no-interaction --prefer-dist --optimize-autoloader
       
   pre_build:
     commands:
-      - echo "PRE-BUILD PHASE"
-      - echo "Build started on `date`"
-      - echo "Running pre-build validations"
+      - echo "Pre-build phase"
       - ls -la
       
   build:
     commands:
-      - echo "BUILD PHASE"
-      - echo "Running comprehensive automated tests"
-      - echo "1. File existence tests"
-      - test -f index.html || (echo "index.html not found" && exit 1)
-      - test -f style.css || (echo "style.css not found" && exit 1)
-      - test -f script.js || (echo "script.js not found" && exit 1)
-      - echo "All required files exist"
-      - echo "2. Content validation tests"
-      - grep -q "CodePipeline S3 Demo" index.html || (echo "Title not found" && exit 1)
-      - grep -q "body" style.css || (echo "CSS body not found" && exit 1)
-      - echo "Content validation passed"
-      - echo "3. Running Node.js Jest tests"
+      - echo "Build phase"
+      - echo "File existence tests"
+      - test -f index.html || exit 1
+      - test -f style.css || exit 1
+      - test -f script.js || exit 1
+      - echo "Content validation"
+      - grep -q "CodePipeline S3 Demo" index.html || exit 1
+      - grep -q "body" style.css || exit 1
+      - echo "Running Jest tests"
       - npm test
-      - echo "Jest tests passed"
-      - echo "4. Running PHP PHPUnit tests"
+      - echo "Running PHPUnit tests"
       - mkdir -p tests/results
-      - ./vendor/bin/phpunit --verbose --testdox
-      - echo "PHPUnit tests passed"
-      - echo "5. PHP syntax validation"
-      - find src -name "*.php" -exec php -l {} \; 2>/dev/null || echo "No PHP files in src directory"
-      - find tests -name "*.php" -exec php -l {} \; || (echo "PHP syntax error in tests" && exit 1)
-      - echo "PHP syntax validation passed"
-      - echo "Building static website"
-      - echo "Processing files"
+      - ./vendor/bin/phpunit --verbose
+      - echo "PHP syntax check"
+      - find tests -name "*.php" -exec php -l {} \;
       
   post_build:
     commands:
-      - echo "POST-BUILD PHASE"
-      - echo "Test Summary:"
-      - echo "- Node.js Jest Tests: Passed"
-      - echo "- PHP PHPUnit Tests: Passed"
-      - echo "- File Validation: Passed"
-      - echo "- Content Validation: Passed"
-      - echo "- Syntax Validation: Passed"
-      - echo "All tests passed! Build completed on `date`"
-      - echo "Files ready for deployment:"
+      - echo "Post-build phase"
+      - echo "All tests completed"
       - ls -la
 
-reports:
-  jest_reports:
-    files:
-      - 'coverage/clover.xml'
-    base-directory: 'coverage'
-    file-format: 'CLOVERXML'
-  
-  phpunit_reports:
-    files:
-      - 'tests/results/junit.xml'
-    file-format: 'JUNITXML'
-    base-directory: '.'
-      
 artifacts:
   files:
     - '**/*'
   exclude-paths:
     - node_modules/**/*
     - vendor/**/*
-    - coverage/**/*
-    - '*.log'
-  name: static-website-hybrid-tested-$(date +%Y-%m-%d-%H-%M-%S)
