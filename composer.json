@@ -1,0 +1,36 @@
+{
+    "name": "codepipeline/s3-demo",
+    "description": "CodePipeline S3 Static Website Demo with PHPUnit Testing",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "CodePipeline Demo Team",
+            "email": "demo@example.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodePipelineDemo\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CodePipelineDemo\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html coverage"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
