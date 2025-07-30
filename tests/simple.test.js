@@ -25,10 +25,10 @@ describe('Basic File Tests', () => {
     expect(htmlContent).toContain('CodePipeline S3 Demo');
   });
   
-  test('CSS should contain body styles', () => {
-    const cssPath = path.join(__dirname, '..', 'style.css');
-    const cssContent = fs.readFileSync(cssPath, 'utf8');
-    expect(cssContent).toContain('body');
+  test('HTML should contain version 2.1', () => {
+    const htmlPath = path.join(__dirname, '..', 'index.html');
+    const htmlContent = fs.readFileSync(htmlPath, 'utf8');
+    expect(htmlContent).toContain('v2.1');
   });
   
 });

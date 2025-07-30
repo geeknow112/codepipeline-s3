@@ -1,4 +1,4 @@
-// CodePipeline S3 Demo JavaScript
+// CodePipeline S3 Demo JavaScript - v2.1 Deployment Test
 
 document.addEventListener('DOMContentLoaded', function() {
     // 現在の日時を表示
@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // デプロイ成功のアニメーション
     animateDeployStatus();
+    
+    // デプロイテスト情報をログ出力
+    console.log('🚀 Deployment Test v2.1 - ' + new Date().toISOString());
 });
 
 function updateTimestamp() {
