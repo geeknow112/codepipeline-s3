@@ -1,4 +1,4 @@
-// CodePipeline S3 Demo JavaScript - v2.1 Deployment Test
+// CodePipeline S3 Demo JavaScript - v2.1.1 OAuth Connection Test
 
 document.addEventListener('DOMContentLoaded', function() {
     // 現在の日時を表示
@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // デプロイ成功のアニメーション
     animateDeployStatus();
     
-    // デプロイテスト情報をログ出力
-    console.log('🚀 Deployment Test v2.1 - ' + new Date().toISOString());
+    // OAuth修正テスト情報をログ出力
+    console.log('🔧 OAuth Connection Fixed - v2.1.1 - ' + new Date().toISOString());
 });
 
 function updateTimestamp() {
