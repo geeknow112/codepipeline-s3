@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodePipeline S3 Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 CodePipeline S3 Demo</h1>
+            <p>GitHub → CodePipeline → S3 Static Website</p>
+        </header>
+        
+        <main>
+            <section class="feature">
+                <h2>✨ 機能</h2>
+                <ul>
+                    <li>GitHub Pull Request Approve でデプロイ</li>
+                    <li>CodeBuild でビルド処理</li>
+                    <li>S3 Static Website Hosting</li>
+                    <li>自動デプロイメント</li>
+                    <li>🆕 Pull Request テスト機能</li>
+                </ul>
+            </section>
+            
+            <section class="feature">
+                <h2>🔄 更新履歴</h2>
+                <ul>
+                    <li>v2.1.2 - 簡単なトリガーテスト (2025-07-30 22:05)</li>
+                    <li>v2.1 - デプロイテスト機能追加 (2025-07-30)</li>
+                    <li>v2.0 - Pull Request テスト実装</li>
+                    <li>v1.0 - 初期リリース</li>
+                </ul>
+            </section>
+            
+            <section class="status">
+                <h2>📊 デプロイ状況</h2>
+                <div class="status-badge">
+                    <span class="badge success">✅ デプロイ成功 - OAuth修正テスト v2.1.1</span>
+                    <span class="badge success">🔧 OAuth Connection Fixed</span>
+                    <span class="timestamp" id="timestamp"></span>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 CodePipeline Practice Environment</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

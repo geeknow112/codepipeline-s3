@@ -1,0 +1,81 @@
+From 7a69be1b308c675a3504126c8ac090968c674aa1 Mon Sep 17 00:00:00 2001
+From: dev-ex1 <dev-ex1@example.com>
+Date: Wed, 30 Jul 2025 20:04:10 +0900
+Subject: [PATCH] feat: Add deployment test v2.1 with enhanced logging
+
+- Update version history to v2.1
+- Add deployment test logging to JavaScript
+- Update Jest test to verify v2.1 version
+- Enhance status badge for deployment testing
+- Ready for CodePipeline deployment verification
+---
+ index.html           | 5 +++--
+ script.js            | 5 ++++-
+ tests/simple.test.js | 8 ++++----
+ 3 files changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/index.html b/index.html
+index a4c187a..2e0ca65 100644
+--- a/index.html
++++ b/index.html
+@@ -28,6 +28,7 @@
+             <section class="feature">
+                 <h2>🔄 更新履歴</h2>
+                 <ul>
++                    <li>v2.1 - デプロイテスト機能追加 (2025-07-30)</li>
+                     <li>v2.0 - Pull Request テスト実装</li>
+                     <li>v1.0 - 初期リリース</li>
+                 </ul>
+@@ -36,8 +37,8 @@
+             <section class="status">
+                 <h2>📊 デプロイ状況</h2>
+                 <div class="status-badge">
+-                    <span class="badge success">✅ デプロイ成功 - 更新テスト v2.0</span>
+-                    <span class="badge success">🚀 Pull Request Test</span>
++                    <span class="badge success">✅ デプロイ成功 - 更新テスト v2.1</span>
++                    <span class="badge success">🚀 Deployment Test PR</span>
+                     <span class="timestamp" id="timestamp"></span>
+                 </div>
+             </section>
+diff --git a/script.js b/script.js
+index e5cb2ab..b3b1db2 100644
+--- a/script.js
++++ b/script.js
+@@ -1,4 +1,4 @@
+-// CodePipeline S3 Demo JavaScript
++// CodePipeline S3 Demo JavaScript - v2.1 Deployment Test
+ 
+ document.addEventListener('DOMContentLoaded', function() {
+     // 現在の日時を表示
+@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
+     
+     // デプロイ成功のアニメーション
+     animateDeployStatus();
++    
++    // デプロイテスト情報をログ出力
++    console.log('🚀 Deployment Test v2.1 - ' + new Date().toISOString());
+ });
+ 
+ function updateTimestamp() {
+diff --git a/tests/simple.test.js b/tests/simple.test.js
+index db45af7..1091406 100644
+--- a/tests/simple.test.js
++++ b/tests/simple.test.js
+@@ -25,10 +25,10 @@ describe('Basic File Tests', () => {
+     expect(htmlContent).toContain('CodePipeline S3 Demo');
+   });
+   
+-  test('CSS should contain body styles', () => {
+-    const cssPath = path.join(__dirname, '..', 'style.css');
+-    const cssContent = fs.readFileSync(cssPath, 'utf8');
+-    expect(cssContent).toContain('body');
++  test('HTML should contain version 2.1', () => {
++    const htmlPath = path.join(__dirname, '..', 'index.html');
++    const htmlContent = fs.readFileSync(htmlPath, 'utf8');
++    expect(htmlContent).toContain('v2.1');
+   });
+   
+ });
+-- 
+2.43.0
+
