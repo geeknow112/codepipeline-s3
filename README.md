@@ -11,22 +11,30 @@ GitHub (PR Approve) → CodePipeline → CodeBuild (Node.js + PHP Tests) → S3 
 ## 📁 ファイル構成
 
 ```
-codepipeline-s3-demo/
-├── index.html              # メインページ
-├── style.css               # スタイルシート
-├── script.js               # JavaScript
-├── buildspec.yml           # ハイブリッドCodeBuild設定
-├── package.json            # Node.js設定・Jest設定
-├── composer.json           # PHP設定・PHPUnit設定
-├── phpunit.xml             # PHPUnit設定
-├── src/                    # PHPソースコード
-│   └── WebsiteValidator.php # ウェブサイト検証ヘルパー
-├── tests/                  # テストファイル
-│   ├── simple.test.js      # Jest テスト (Node.js)
-│   ├── WebsiteTest.php     # PHPUnit メインテスト
+codepipeline-s3/
+├── scripts/                    # 運用スクリプト
+│   └── deploy/
+│       ├── emergency-deploy.sh # 緊急デプロイスクリプト
+│       └── manual-deploy.sh    # 手動デプロイスクリプト
+├── docs/                       # ドキュメント
+│   ├── troubleshooting.md      # トラブルシューティングガイド
+│   └── github-connection-fix.md # GitHub接続修正手順
+├── index.html                  # メインページ
+├── style.css                   # スタイルシート
+├── script.js                   # JavaScript
+├── buildspec.yml               # ハイブリッドCodeBuild設定
+├── package.json                # Node.js設定・Jest設定
+├── composer.json               # PHP設定・PHPUnit設定
+├── phpunit.xml                 # PHPUnit設定
+├── src/                        # PHPソースコード
+│   └── WebsiteValidator.php    # ウェブサイト検証ヘルパー
+├── tests/                      # テストファイル
+│   ├── simple.test.js          # Jest テスト (Node.js)
+│   ├── WebsiteTest.php         # PHPUnit メインテスト
 │   ├── WebsiteValidatorTest.php # PHPUnit バリデータテスト
-│   └── results/            # テスト結果出力用
-└── README.md               # このファイル
+│   └── results/                # テスト結果出力用
+├── deploy/                     # デプロイ用ファイル
+└── README.md                   # このファイル
 ```
 
 ## 🧪 ハイブリッド自動テスト機能
@@ -82,6 +90,17 @@ composer install            # 依存関係インストール
 5. **テスト失敗時**: デプロイ停止・通知
 
 ## 🔧 セットアップ
+
+### スクリプト使用方法
+
+#### デプロイスクリプト
+```bash
+# 緊急デプロイ
+./scripts/deploy/emergency-deploy.sh
+
+# 手動デプロイ
+./scripts/deploy/manual-deploy.sh
+```
 
 ### 必要なAWSリソース
 
