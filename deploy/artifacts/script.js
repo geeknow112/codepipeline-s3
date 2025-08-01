@@ -1,4 +1,4 @@
-// CodePipeline S3 Demo JavaScript - v2.1.1 OAuth Connection Test
+// CodePipeline S3 Demo JavaScript - v2.2.0 Website Folder Structure
 
 document.addEventListener('DOMContentLoaded', function() {
     // 現在の日時を表示
