@@ -116,7 +116,7 @@ f09e8d6 - fix: Update dependencies for PHP 7.4 compatibility in CodeBuild
 
 ## 👥 対応者
 
-- **主担当**: Amazon Q
+- **主担当**: 開発チーム
 - **確認者**: geeknow112
 - **承認者**: geeknow112
 
