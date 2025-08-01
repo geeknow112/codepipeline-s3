@@ -235,6 +235,6 @@ composer install --no-interaction --prefer-dist --optimize-autoloader
 
 ---
 
-**作成者**: Amazon Q  
+**作成者**: 開発チーム  
 **引継ぎ日**: 2025-08-01  
 **次回更新予定**: 2025-09-01
