@@ -25,11 +25,11 @@ class WebsiteTest extends TestCase
      */
     public function html_file_should_exist(): void
     {
-        $htmlPath = $this->projectRoot . '/index.html';
+        $htmlPath = $this->projectRoot . '/website/index.html';
         
         $this->assertFileExists(
             $htmlPath,
-            'index.html file should exist in project root'
+            'website/index.html file should exist in project root'
         );
         
         $this->assertFileIsReadable(
@@ -82,7 +82,7 @@ class WebsiteTest extends TestCase
      */
     public function html_should_contain_expected_title(): void
     {
-        $htmlPath = $this->projectRoot . '/index.html';
+        $htmlPath = $this->projectRoot . '/website/index.html';
         $htmlContent = file_get_contents($htmlPath);
         
         $this->assertStringContainsString(
@@ -148,7 +148,7 @@ class WebsiteTest extends TestCase
      */
     public function html_should_have_proper_structure(): void
     {
-        $htmlPath = $this->projectRoot . '/index.html';
+        $htmlPath = $this->projectRoot . '/website/index.html';
         $htmlContent = file_get_contents($htmlPath);
         
         // Check for essential HTML tags
@@ -218,7 +218,7 @@ class WebsiteTest extends TestCase
      */
     public function files_should_not_contain_sensitive_information(): void
     {
-        $files = ['index.html', 'style.css', 'script.js', 'README.md'];
+        $files = ['website/index.html', 'website/style.css', 'website/script.js', 'README.md'];
         $sensitivePatterns = [
             '/password\s*[:=]\s*["\'][\w]+["\']/i',
             '/secret\s*[:=]\s*["\'][\w]+["\']/i',

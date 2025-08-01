@@ -34,12 +34,12 @@ phases:
     commands:
       - echo "=== Build phase ==="
       - echo "File existence tests..."
-      - test -f index.html && echo "✅ index.html exists" || (echo "❌ index.html missing" && exit 1)
-      - test -f style.css && echo "✅ style.css exists" || (echo "❌ style.css missing" && exit 1)
-      - test -f script.js && echo "✅ script.js exists" || (echo "❌ script.js missing" && exit 1)
+      - test -f website/index.html && echo "✅ website/index.html exists" || (echo "❌ website/index.html missing" && exit 1)
+      - test -f website/style.css && echo "✅ website/style.css exists" || (echo "❌ website/style.css missing" && exit 1)
+      - test -f website/script.js && echo "✅ website/script.js exists" || (echo "❌ website/script.js missing" && exit 1)
       - echo "Content validation..."
-      - grep -q "CodePipeline S3 Demo" index.html && echo "✅ Title found" || (echo "❌ Title not found" && exit 1)
-      - grep -q "body" style.css && echo "✅ Body styles found" || (echo "❌ Body styles not found" && exit 1)
+      - grep -q "CodePipeline S3 Demo" website/index.html && echo "✅ Title found" || (echo "❌ Title not found" && exit 1)
+      - grep -q "body" website/style.css && echo "✅ Body styles found" || (echo "❌ Body styles not found" && exit 1)
       - echo "Running Jest tests..."
       - npm test || (echo "❌ Jest tests failed" && exit 1)
       - echo "Creating test results directory..."
@@ -59,8 +59,5 @@ phases:
 
 artifacts:
   files:
-    - '**/*'
-  exclude-paths:
-    - node_modules/**/*
-    - vendor/**/*
-    - tests/results/**/*
+    - 'website/**/*'
+  name: website-artifacts

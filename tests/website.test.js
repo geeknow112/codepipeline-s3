@@ -5,7 +5,7 @@ const path = require('path');
 describe('📁 File Existence Tests', () => {
   
   test('✅ HTML file should exist and be accessible', () => {
-    const htmlPath = path.join(__dirname, '..', 'index.html');
+    const htmlPath = path.join(__dirname, '..', 'website', 'index.html');
     expect(fs.existsSync(htmlPath)).toBe(true);
     
     // Check file is readable
@@ -15,7 +15,7 @@ describe('📁 File Existence Tests', () => {
   });
   
   test('✅ CSS file should exist and be accessible', () => {
-    const cssPath = path.join(__dirname, '..', 'style.css');
+    const cssPath = path.join(__dirname, '..', 'website', 'style.css');
     expect(fs.existsSync(cssPath)).toBe(true);
     
     const cssContent = fs.readFileSync(cssPath, 'utf8');
@@ -23,7 +23,7 @@ describe('📁 File Existence Tests', () => {
   });
   
   test('✅ JavaScript file should exist and be accessible', () => {
-    const jsPath = path.join(__dirname, '..', 'script.js');
+    const jsPath = path.join(__dirname, '..', 'website', 'script.js');
     expect(fs.existsSync(jsPath)).toBe(true);
     
     const jsContent = fs.readFileSync(jsPath, 'utf8');
@@ -47,7 +47,7 @@ describe('🔍 HTML Structure Tests', () => {
   let htmlContent;
   
   beforeAll(() => {
-    const htmlPath = path.join(__dirname, '..', 'index.html');
+    const htmlPath = path.join(__dirname, '..', 'website', 'index.html');
     htmlContent = fs.readFileSync(htmlPath, 'utf8');
   });
   
@@ -86,7 +86,7 @@ describe('🎨 CSS Validation Tests', () => {
   let cssContent;
   
   beforeAll(() => {
-    const cssPath = path.join(__dirname, '..', 'style.css');
+    const cssPath = path.join(__dirname, '..', 'website', 'style.css');
     cssContent = fs.readFileSync(cssPath, 'utf8');
   });
   
@@ -120,7 +120,7 @@ describe('⚡ JavaScript Validation Tests', () => {
   let jsContent;
   
   beforeAll(() => {
-    const jsPath = path.join(__dirname, '..', 'script.js');
+    const jsPath = path.join(__dirname, '..', 'website', 'script.js');
     jsContent = fs.readFileSync(jsPath, 'utf8');
   });
   
@@ -148,7 +148,7 @@ describe('⚡ JavaScript Validation Tests', () => {
 describe('📄 Content Validation Tests', () => {
   
   test('✅ HTML should contain expected project content', () => {
-    const htmlPath = path.join(__dirname, '..', 'index.html');
+    const htmlPath = path.join(__dirname, '..', 'website', 'index.html');
     const htmlContent = fs.readFileSync(htmlPath, 'utf8');
     
     expect(htmlContent).toContain('CodePipeline S3 Demo');
@@ -198,7 +198,7 @@ describe('⚙️ Configuration Tests', () => {
 describe('🔒 Security and Best Practices Tests', () => {
   
   test('✅ Should not contain sensitive information', () => {
-    const files = ['index.html', 'style.css', 'script.js', 'README.md'];
+    const files = ['website/index.html', 'website/style.css', 'website/script.js', 'README.md'];
     
     files.forEach(file => {
       const filePath = path.join(__dirname, '..', file);
@@ -214,7 +214,7 @@ describe('🔒 Security and Best Practices Tests', () => {
   });
   
   test('✅ HTML should have proper charset declaration', () => {
-    const htmlPath = path.join(__dirname, '..', 'index.html');
+    const htmlPath = path.join(__dirname, '..', 'website', 'index.html');
     const htmlContent = fs.readFileSync(htmlPath, 'utf8');
     
     expect(htmlContent).toMatch(/<meta.*charset.*utf-8/i);
