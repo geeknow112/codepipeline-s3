@@ -3,43 +3,59 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 12
-      php: 7.4
+      nodejs: 18
+      php: 8.1
     commands:
-      - echo "Installing dependencies"
-      - npm install
-      - curl -sS https://getcomposer.org/installer | php
-      - mv composer.phar /usr/local/bin/composer
-      - composer install --no-interaction --prefer-dist --optimize-autoloader
+      - echo "=== Installing dependencies ==="
+      - echo "Node.js version:" && node --version
+      - echo "NPM version:" && npm --version
+      - echo "PHP version:" && php --version
+      - echo "Current directory:" && pwd
+      - echo "Directory contents:" && ls -la
+      - echo "Installing npm dependencies..."
+      - npm install || (echo "NPM install failed" && exit 1)
+      - echo "Installing Composer..."
+      - curl -sS https://getcomposer.org/installer | php || (echo "Composer download failed" && exit 1)
+      - mv composer.phar /usr/local/bin/composer || (echo "Composer move failed" && exit 1)
+      - chmod +x /usr/local/bin/composer
+      - echo "Composer version:" && composer --version
+      - echo "Installing PHP dependencies..."
+      - composer install --no-interaction --prefer-dist --optimize-autoloader || (echo "Composer install failed" && exit 1)
       
   pre_build:
     commands:
-      - echo "Pre-build phase"
-      - ls -la
+      - echo "=== Pre-build phase ==="
+      - echo "Current directory:" && pwd
+      - echo "Directory contents:" && ls -la
+      - echo "Node modules check:" && ls -la node_modules/ | head -5
+      - echo "Vendor check:" && ls -la vendor/ | head -5
       
   build:
     commands:
-      - echo "Build phase"
-      - echo "File existence tests"
-      - test -f index.html || exit 1
-      - test -f style.css || exit 1
-      - test -f script.js || exit 1
-      - echo "Content validation"
-      - grep -q "CodePipeline S3 Demo" index.html || exit 1
-      - grep -q "body" style.css || exit 1
-      - echo "Running Jest tests"
-      - npm test
-      - echo "Running PHPUnit tests"
+      - echo "=== Build phase ==="
+      - echo "File existence tests..."
+      - test -f index.html && echo "✅ index.html exists" || (echo "❌ index.html missing" && exit 1)
+      - test -f style.css && echo "✅ style.css exists" || (echo "❌ style.css missing" && exit 1)
+      - test -f script.js && echo "✅ script.js exists" || (echo "❌ script.js missing" && exit 1)
+      - echo "Content validation..."
+      - grep -q "CodePipeline S3 Demo" index.html && echo "✅ Title found" || (echo "❌ Title not found" && exit 1)
+      - grep -q "body" style.css && echo "✅ Body styles found" || (echo "❌ Body styles not found" && exit 1)
+      - echo "Running Jest tests..."
+      - npm test || (echo "❌ Jest tests failed" && exit 1)
+      - echo "Creating test results directory..."
       - mkdir -p tests/results
-      - ./vendor/bin/phpunit --verbose
-      - echo "PHP syntax check"
-      - find tests -name "*.php" -exec php -l {} \;
+      - echo "Running PHPUnit tests..."
+      - ./vendor/bin/phpunit --verbose || (echo "❌ PHPUnit tests failed" && exit 1)
+      - echo "PHP syntax check..."
+      - find tests -name "*.php" -exec php -l {} \; || (echo "❌ PHP syntax check failed" && exit 1)
+      - echo "✅ All tests completed successfully"
       
   post_build:
     commands:
-      - echo "Post-build phase"
-      - echo "All tests completed"
-      - ls -la
+      - echo "=== Post-build phase ==="
+      - echo "Final directory contents:" && ls -la
+      - echo "Test results:" && ls -la tests/results/ || echo "No test results directory"
+      - echo "🎉 Build completed successfully"
 
 artifacts:
   files:
@@ -47,3 +63,4 @@ artifacts:
   exclude-paths:
     - node_modules/**/*
     - vendor/**/*
+    - tests/results/**/*
