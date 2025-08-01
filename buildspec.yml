@@ -59,5 +59,6 @@ phases:
 
 artifacts:
   files:
-    - 'website/**/*'
+    - 'website/*'
+  base-directory: 'website'
   name: website-artifacts
