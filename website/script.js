@@ -1,4 +1,4 @@
-// CodePipeline S3 Demo JavaScript - v2.3.0 Animation Update
+// CodePipeline S3 Demo JavaScript - v2.3.0 Expandable Sections
 
 document.addEventListener('DOMContentLoaded', function() {
     // 現在の日時を表示
@@ -10,14 +10,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // デプロイ成功のアニメーション
     animateDeployStatus();
     
-    // 新機能: インタラクティブアニメーション
+    // インタラクティブアニメーション
     initInteractiveAnimations();
     
-    // 新機能: パーティクルエフェクト
+    // 新機能: 展開可能セクション
+    initExpandableSections();
+    
+    // パーティクルエフェクト
     createParticleEffect();
     
-    // OAuth修正テスト情報をログ出力
-    console.log('🎉 Animation Features Added - v2.3.0 - ' + new Date().toISOString());
+    console.log('🎯 Expandable Sections Added - v2.3.0 - ' + new Date().toISOString());
 });
 
 function updateTimestamp() {
@@ -52,7 +54,94 @@ function animateDeployStatus() {
     }
 }
 
-// 新機能: インタラクティブアニメーション
+// 新機能: 展開可能セクションの初期化
+function initExpandableSections() {
+    const headers = document.querySelectorAll('.expandable-header');
+    
+    headers.forEach(header => {
+        header.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const content = document.getElementById(targetId);
+            const icon = this.querySelector('.expand-icon');
+            
+            // アクティブ状態の切り替え
+            const isActive = content.classList.contains('active');
+            
+            if (isActive) {
+                // 閉じる
+                content.classList.remove('active');
+                this.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+                
+                // アニメーション効果
+                content.style.maxHeight = '0px';
+                content.style.padding = '0 20px';
+                
+            } else {
+                // 他の開いているセクションを閉じる
+                closeAllSections();
+                
+                // 開く
+                content.classList.add('active');
+                this.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+                
+                // アニメーション効果
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.padding = '20px';
+                
+                // スムーズスクロール
+                setTimeout(() => {
+                    this.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }, 200);
+            }
+            
+            // クリック波紋エフェクト
+            createRippleEffect(event, this);
+        });
+        
+        // ホバーエフェクト
+        header.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)';
+        });
+        
+        header.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('active')) {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+            }
+        });
+    });
+}
+
+// 全てのセクションを閉じる
+function closeAllSections() {
+    const contents = document.querySelectorAll('.expandable-content');
+    const headers = document.querySelectorAll('.expandable-header');
+    const icons = document.querySelectorAll('.expand-icon');
+    
+    contents.forEach(content => {
+        content.classList.remove('active');
+        content.style.maxHeight = '0px';
+        content.style.padding = '0 20px';
+    });
+    
+    headers.forEach(header => {
+        header.classList.remove('active');
+        header.style.transform = 'translateY(0)';
+        header.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+    });
+    
+    icons.forEach(icon => {
+        icon.style.transform = 'rotate(0deg)';
+    });
+}
+
+// インタラクティブアニメーション
 function initInteractiveAnimations() {
     // ヘッダーのクリックアニメーション
     const header = document.querySelector('header h1');
@@ -89,12 +178,15 @@ function initInteractiveAnimations() {
     const container = document.querySelector('.container');
     if (container) {
         container.addEventListener('click', function(e) {
-            createRippleEffect(e, this);
+            // 展開ヘッダーのクリックは除外
+            if (!e.target.closest('.expandable-header')) {
+                createRippleEffect(e, this);
+            }
         });
     }
 }
 
-// 新機能: クリック波紋エフェクト
+// クリック波紋エフェクト
 function createRippleEffect(event, element) {
     const ripple = document.createElement('div');
     const rect = element.getBoundingClientRect();
@@ -140,15 +232,15 @@ function createRippleEffect(event, element) {
     }, 600);
 }
 
-// 新機能: パーティクルエフェクト
+// パーティクルエフェクト
 function createParticleEffect() {
     const particles = [];
-    const particleCount = 5;
+    const particleCount = 3;
     
     for (let i = 0; i < particleCount; i++) {
         setTimeout(() => {
             createParticle();
-        }, i * 1000);
+        }, i * 2000);
     }
 }
 
@@ -165,7 +257,7 @@ function createParticle() {
         opacity: 0.7;
         left: ${Math.random() * window.innerWidth}px;
         top: ${window.innerHeight}px;
-        animation: float-up 3s ease-out forwards;
+        animation: float-up 4s ease-out forwards;
     `;
     
     // パーティクルアニメーションを動的に追加
@@ -187,7 +279,7 @@ function createParticle() {
     
     setTimeout(() => {
         particle.remove();
-    }, 3000);
+    }, 4000);
 }
 
 // GitHub情報を表示（実際のデプロイ時に使用）
