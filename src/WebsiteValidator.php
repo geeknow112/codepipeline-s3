@@ -99,9 +99,9 @@ class WebsiteValidator
     public function getProjectFiles(): array
     {
         return [
-            'html' => $this->projectRoot . '/index.html',
-            'css' => $this->projectRoot . '/style.css',
-            'js' => $this->projectRoot . '/script.js',
+            'html' => $this->projectRoot . '/website/index.html',
+            'css' => $this->projectRoot . '/website/style.css',
+            'js' => $this->projectRoot . '/website/script.js',
             'readme' => $this->projectRoot . '/README.md',
             'buildspec' => $this->projectRoot . '/buildspec.yml',
             'package' => $this->projectRoot . '/package.json'

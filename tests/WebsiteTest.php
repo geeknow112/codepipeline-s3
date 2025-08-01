@@ -44,16 +44,16 @@ class WebsiteTest extends TestCase
      */
     public function css_file_should_exist(): void
     {
-        $cssPath = $this->projectRoot . '/style.css';
+        $cssPath = $this->projectRoot . '/website/style.css';
         
         $this->assertFileExists(
             $cssPath,
-            'style.css file should exist in project root'
+            'website/style.css file should exist in project root'
         );
         
         $this->assertFileIsReadable(
             $cssPath,
-            'style.css should be readable'
+            'website/style.css should be readable'
         );
     }
 
@@ -63,16 +63,16 @@ class WebsiteTest extends TestCase
      */
     public function javascript_file_should_exist(): void
     {
-        $jsPath = $this->projectRoot . '/script.js';
+        $jsPath = $this->projectRoot . '/website/script.js';
         
         $this->assertFileExists(
             $jsPath,
-            'script.js file should exist in project root'
+            'website/script.js file should exist in project root'
         );
         
         $this->assertFileIsReadable(
             $jsPath,
-            'script.js should be readable'
+            'website/script.js should be readable'
         );
     }
 
@@ -104,7 +104,7 @@ class WebsiteTest extends TestCase
      */
     public function css_should_contain_body_styles(): void
     {
-        $cssPath = $this->projectRoot . '/style.css';
+        $cssPath = $this->projectRoot . '/website/style.css';
         $cssContent = file_get_contents($cssPath);
         
         $this->assertStringContainsString(
@@ -126,7 +126,7 @@ class WebsiteTest extends TestCase
      */
     public function javascript_should_contain_functions(): void
     {
-        $jsPath = $this->projectRoot . '/script.js';
+        $jsPath = $this->projectRoot . '/website/script.js';
         $jsContent = file_get_contents($jsPath);
         
         $this->assertStringContainsString(
@@ -170,7 +170,7 @@ class WebsiteTest extends TestCase
      */
     public function css_should_have_valid_syntax(): void
     {
-        $cssPath = $this->projectRoot . '/style.css';
+        $cssPath = $this->projectRoot . '/website/style.css';
         $cssContent = file_get_contents($cssPath);
         
         // Basic CSS syntax validation
