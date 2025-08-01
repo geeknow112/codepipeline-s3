@@ -89,14 +89,6 @@ function initExpandableSections() {
                 // アニメーション効果
                 content.style.maxHeight = content.scrollHeight + 'px';
                 content.style.padding = '20px';
-                
-                // スムーズスクロール
-                setTimeout(() => {
-                    this.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'start' 
-                    });
-                }, 200);
             }
             
             // クリック波紋エフェクト
