@@ -231,7 +231,7 @@ class WebsiteTest extends TestCase
                 $content = file_get_contents($filePath);
                 
                 foreach ($sensitivePatterns as $pattern) {
-                    $this->assertDoesNotMatchRegularExpression(
+                    $this->assertNotRegExp(
                         $pattern,
                         $content,
                         "File {$file} should not contain sensitive information"
