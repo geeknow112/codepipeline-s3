@@ -102,6 +102,112 @@ header p {
     font-size: 0.9em;
 }
 
+/* 展開可能セクションのスタイル */
+.expandable-section {
+    margin-bottom: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.expandable-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.expandable-header:hover {
+    background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    transform: translateY(-1px);
+}
+
+.expandable-header h2 {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2c3e50;
+    font-size: 1.5em;
+}
+
+.expand-icon {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+    color: #3498db;
+}
+
+.expandable-header.active .expand-icon {
+    transform: rotate(180deg);
+}
+
+.expandable-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+    background: #ffffff;
+}
+
+.expandable-content.active {
+    max-height: 1000px;
+    padding: 20px;
+}
+
+.flow-step {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #3498db;
+    border-radius: 5px;
+}
+
+.flow-step h3 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 1.2em;
+}
+
+.flow-step p {
+    color: #6c757d;
+    margin: 0;
+}
+
+.animation-demo {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.animation-demo h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.animation-demo ul {
+    list-style: none;
+    padding: 0;
+}
+
+.animation-demo li {
+    background: #ffffff;
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-left: 3px solid #e74c3c;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.animation-demo li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
 footer {
     text-align: center;
     padding: 20px 0;

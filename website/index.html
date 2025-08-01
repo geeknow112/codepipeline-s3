@@ -9,8 +9,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>🚀 CodePipeline S3 Demo v2.2</h1>
-            <p>GitHub → CodePipeline → S3 Static Website (Website Folder Structure)</p>
+            <h1>🚀 CodePipeline S3 Demo v2.3</h1>
+            <p>GitHub → CodePipeline → S3 Static Website (Interactive Features)</p>
         </header>
         
         <main>
@@ -26,9 +26,69 @@
                 </ul>
             </section>
             
+            <!-- 新機能: 展開可能なセクション -->
+            <section class="expandable-section">
+                <div class="expandable-header" data-target="technical-details">
+                    <h2>🔧 技術詳細 <span class="expand-icon">▼</span></h2>
+                </div>
+                <div class="expandable-content" id="technical-details">
+                    <ul>
+                        <li><strong>フロントエンド</strong>: HTML5, CSS3, JavaScript ES6+</li>
+                        <li><strong>CI/CD</strong>: AWS CodePipeline, CodeBuild</li>
+                        <li><strong>ホスティング</strong>: Amazon S3 Static Website</li>
+                        <li><strong>バージョン管理</strong>: GitHub</li>
+                        <li><strong>テスト</strong>: Jest (JavaScript), PHPUnit (PHP)</li>
+                        <li><strong>アニメーション</strong>: CSS3 Transitions, JavaScript DOM操作</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="expandable-section">
+                <div class="expandable-header" data-target="deployment-flow">
+                    <h2>🚀 デプロイフロー <span class="expand-icon">▼</span></h2>
+                </div>
+                <div class="expandable-content" id="deployment-flow">
+                    <div class="flow-step">
+                        <h3>1. 開発フェーズ</h3>
+                        <p>ローカル環境でコード開発・テスト実行</p>
+                    </div>
+                    <div class="flow-step">
+                        <h3>2. Pull Request作成</h3>
+                        <p>GitHub上でPR作成・レビュー依頼</p>
+                    </div>
+                    <div class="flow-step">
+                        <h3>3. 自動ビルド</h3>
+                        <p>CodeBuildでテスト実行・ビルド処理</p>
+                    </div>
+                    <div class="flow-step">
+                        <h3>4. 自動デプロイ</h3>
+                        <p>S3バケットへの自動デプロイ実行</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="expandable-section">
+                <div class="expandable-header" data-target="animation-features">
+                    <h2>✨ アニメーション機能 <span class="expand-icon">▼</span></h2>
+                </div>
+                <div class="expandable-content" id="animation-features">
+                    <div class="animation-demo">
+                        <h3>インタラクティブ要素</h3>
+                        <ul>
+                            <li>🎯 ヘッダークリック: スケール・回転アニメーション</li>
+                            <li>🌊 波紋エフェクト: クリック時の円形波紋</li>
+                            <li>✨ パーティクル: 浮遊するアニメーション</li>
+                            <li>📱 ホバーエフェクト: マウスオーバー時の変化</li>
+                            <li>🔽 展開アニメーション: スムーズな開閉動作</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
             <section class="feature">
                 <h2>🔄 更新履歴</h2>
                 <ul>
+                    <li>v2.3.0 - インタラクティブ機能・展開セクション追加 (2025-08-01)</li>
                     <li>v2.2.0 - Website フォルダ構成整理 (2025-08-01)</li>
                     <li>v2.1.6 - PR経由CodePipeline実行テスト (2025-08-01)</li>
                     <li>v2.1.4 - Pipeline再検証テスト (2025-07-30 22:35)</li>
@@ -41,8 +101,8 @@
             <section class="status">
                 <h2>📊 デプロイ状況</h2>
                 <div class="status-badge">
-                    <span class="badge success">✅ デプロイ成功 - Website構成整理 v2.2.0</span>
-                    <span class="badge success">🗂️ Website Folder Structure</span>
+                    <span class="badge success">✅ デプロイ成功 - インタラクティブ機能 v2.3.0</span>
+                    <span class="badge success">🎯 展開可能セクション実装</span>
                     <span class="timestamp" id="timestamp"></span>
                 </div>
             </section>
