@@ -117,10 +117,10 @@ npm test
 ### AWS Profile
 ```bash
 # 使用プロファイル
-AWS_PROFILE=lober-system
+AWS_PROFILE=your-profile
 
 # 確認コマンド
-aws sts get-caller-identity --profile lober-system
+aws sts get-caller-identity --profile your-profile
 ```
 
 ### GitHub Token
