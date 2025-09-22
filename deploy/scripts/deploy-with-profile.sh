@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# S3デプロイスクリプト (lober-system プロファイル用)
+# S3デプロイスクリプト (your-profile プロファイル用)
 # 使用方法: ./deploy-with-profile.sh [BUCKET-NAME]
 
-PROFILE_NAME="lober-system"
+PROFILE_NAME="your-profile"
 DEPLOY_DIR="deploy-artifacts"
 BUCKET_NAME=${1:-"codepipeline-s3-demo-website-20250729"}
 
